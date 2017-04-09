@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="prioritylevels">
+        <item>Низький пріоритет</item>
+        <item>Середній пріоритет</item>
+        <item>Високий пріоритет</item>
+    </string-array>
+    <string name="app_name">Нагадай мені зробити це</string>
+    <string name="action_settings">Налаштування</string>
+    <string name="current_task">Поточні</string>
+    <string name="dialog_cancel">Відміна</string>
+    <string name="dialog_editing_title">Змінити завдання</string>
+    <string name="dialog_empty_error_title">Будь ласка, заповніть це поле</string>
+    <string name="dialog_ok">Зберегти</string>
+    <string name="dialog_removing_message">Ви впевнені що хочете видалити цю задачу?</string>
+    <string name="dialog_title">Додавання завдання</string>
+    <string name="do_not_show_splash">Не показувати заставку</string>
+    <string name="done_task">Виконані</string>
+    <string name="hello_blank_fragment">Привіт фрагмент бланк</string>
+    <string name="hello_world">Привіт світ!</string>
+    <string name="removed">Видалено</string>
+    <string name="separator_future">Майбутнє</string>
+    <string name="separator_overdue">Минуле</string>
+    <string name="separator_today">Сьогодні</string>
+    <string name="separator_tomorrow">Завтра</string>
+    <string name="task_date">Дата</string>
+    <string name="task_time">Час</string>
+    <string name="task_title">Заголовок</string>
+</resources>
