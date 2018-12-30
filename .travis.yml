@@ -1,7 +1,6 @@
 sudo: required
 language: android
 jdk: oraclejdk8
-sudo: required
 android:
   components:
   - tools
@@ -33,14 +32,14 @@ before_install:
 - chmod +x gradlew
 - yes | sdkmanager "platforms;android-22"
 before_deploy:
-  # Set up git user name and tag this commit
-  - git config --local user.name "AleksandrAleksandrov"
-  - git config --local user.email "aleksandraleksandrovua@gmail.com"
-  - git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
+# Set up git user name and tag this commit
+- git config --local user.name "AleksandrAleksandrov"
+- git config --local user.email "aleksandraleksandrovua@gmail.com"
+- git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
 deploy:
   provider: releases
   api_key:
-    secure: "juk/nOVaXl1H2P3reCoXtznoJOycfVf0tvkxsxWddawdHv8ZVZ95RKVu4ZDFvNyNSkCP2lvaITcJhwLya9rFa/zCbnlAZMys6wnos8CqGTw9G1xFaYSAz4aNHFwtsxSX6dCm6CWWcGp6LLOPQCyagg12k9kejxOtnlvqU29i+nGc9GaR/XFBB4QG09ZnQcZFdgXEaIHGnjQiSuZHku4pcDwfCHnfrHdMCDB6Ty8FrDqisomAwd4Eq8Xb0yo4P4uif0unvbi/XrFiKN21fWLkuoKr2iIIlH6XYAjOflNHxos94srzVpjTs4vMb31mVc/cVqT46KPQxURu4npU6fqrqr6lTRmvZtBPqBIUT6qXqvgYux4Bpj2P0GWaUjW7SBhA32YQ0m92y+JdS2tIEtARcFSHHNaTx4822/Cqqd+97aDmKzYYuZvs8bt/mZeFmkt4fkMJ0m8Bar1T2d1plFcZw7+pbWWEwltkPkRc/cjxCIHUwYxwwjkE6xQsfBVV81Od5voL2xFKIgu1D1Bg9BQ52+WuCZc36V+gBOsLGg+F8Fki9j9NubD8DcOEOai1sYc+sB+OdQ+DWMiPX0lKQ6ImxlkUQNQvPfoei61v+ZRNVkpreNcEugtZxj3WlFvrr2EK/gJL8maCNMO7lvK+eeCStNBBmTOR8aLM3P4D0JWFyFo="
+    secure: j3dciIRBjQtuWH7chp3CetCR1hpKM7bopiFQSZ7njK8FFDs+HoGxhS+JOLNiwRtxD8PWI9Kv9IxVvd1xroBlpCPieZ05Db0hu0jGn/jkqRjLpWIVe7mB/fOAJHdgyWR+M5XgyHdDyycFfSgzgJmqh4ch7pP9qePTxhrUi6rYw6Tdnt5UpkkKYdITgV6pirh+ZiMLp8g0x9N8kvFsDOCgr8A7NCMvCyVqHUtHiENs209IdpQmRV9AAXVnCW7yKViGojkIHY/SExWt+jzZSD2Ud0pqwtTw5mrg+VP57nCdENId23C1hQVzXhmwK1Ybydm2p55Ek+3LS+Hmoj7d8m5Mt7Ythh5IxeIdKlf15c6MLcgetnjaNvZUnwETnkZskrGq8ttfQF6GsF+8Eb1Y1vaGQUYDkbaLom1Vad5DLsmCszx8gzkEGAV1TN+aD9uoXbcXVI16DML4Wyyx5PF7lHeqNrPVov9GeWvEkt5EEEVyJ1Fq8i/USInoLOJRRC9DvXybup82JMrvO3F1pE9tmSxhNCH7AopQEoTv85KKCarTnPR/iAIbqBnjle1kaOe1bkZ7uerPiZb53sg5LhvEk8vB/TrhD8mCh8OSRQIzbm83x38XGbxjHAxeXADkeKZjUCzLTaSfJ2BiQ8TSUfILcVBDdez1NODyqREmxOq5d2wvp98=
   file: "app/build/outputs/apk/*/**.apk"
   skip_cleanup: "true"
   file_glob: "true"
