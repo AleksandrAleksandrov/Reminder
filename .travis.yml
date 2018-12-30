@@ -32,7 +32,6 @@ before_install:
 - chmod +x gradlew
 - yes | sdkmanager "platforms;android-22"
 before_deploy:
-# Set up git user name and tag this commit
 - git config --local user.name "AleksandrAleksandrov"
 - git config --local user.email "aleksandraleksandrovua@gmail.com"
 - git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
