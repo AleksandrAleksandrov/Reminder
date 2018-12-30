@@ -1,0 +1,50 @@
+sudo: required
+language: android
+jdk: oraclejdk8
+sudo: required
+android:
+  components:
+  - tools
+  - platform-tools
+  - build-tools-28.0.3
+  - android-22
+  - android-28
+  - extra-google-google_play_services
+  - extra-google-m2repository
+  - extra-android-m2repository
+  - addon-google_apis-google-28
+  - add-on
+  - extra
+  - sys-img-armeabi-v7a-android-22
+  licenses:
+  - android-sdk-preview-license-52d11cd2
+  - android-sdk-license-.+
+  - google-gdk-license-.+
+script:
+- "./gradlew assembleDebug"
+after_script:
+- "./gradlew crashlyticsUploadDistributionDebug"
+before_script:
+- echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
+- emulator -avd test -no-skin -no-audio -no-window &
+- android-wait-for-emulator
+- adb shell input keyevent 82 &
+before_install:
+- chmod +x gradlew
+- yes | sdkmanager "platforms;android-22"
+before_deploy:
+  # Set up git user name and tag this commit
+  - git config --local user.name "AleksandrAleksandrov"
+  - git config --local user.email "aleksandraleksandrovua@gmail.com"
+  - git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
+deploy:
+  provider: releases
+  api_key:
+    secure: "juk/nOVaXl1H2P3reCoXtznoJOycfVf0tvkxsxWddawdHv8ZVZ95RKVu4ZDFvNyNSkCP2lvaITcJhwLya9rFa/zCbnlAZMys6wnos8CqGTw9G1xFaYSAz4aNHFwtsxSX6dCm6CWWcGp6LLOPQCyagg12k9kejxOtnlvqU29i+nGc9GaR/XFBB4QG09ZnQcZFdgXEaIHGnjQiSuZHku4pcDwfCHnfrHdMCDB6Ty8FrDqisomAwd4Eq8Xb0yo4P4uif0unvbi/XrFiKN21fWLkuoKr2iIIlH6XYAjOflNHxos94srzVpjTs4vMb31mVc/cVqT46KPQxURu4npU6fqrqr6lTRmvZtBPqBIUT6qXqvgYux4Bpj2P0GWaUjW7SBhA32YQ0m92y+JdS2tIEtARcFSHHNaTx4822/Cqqd+97aDmKzYYuZvs8bt/mZeFmkt4fkMJ0m8Bar1T2d1plFcZw7+pbWWEwltkPkRc/cjxCIHUwYxwwjkE6xQsfBVV81Od5voL2xFKIgu1D1Bg9BQ52+WuCZc36V+gBOsLGg+F8Fki9j9NubD8DcOEOai1sYc+sB+OdQ+DWMiPX0lKQ6ImxlkUQNQvPfoei61v+ZRNVkpreNcEugtZxj3WlFvrr2EK/gJL8maCNMO7lvK+eeCStNBBmTOR8aLM3P4D0JWFyFo="
+  file: "app/build/outputs/apk/*/**.apk"
+  skip_cleanup: "true"
+  file_glob: "true"
+  skip_cleanup: true
+  on:
+    branch: master
+    repo: AleksandrAleksandrov/Reminder

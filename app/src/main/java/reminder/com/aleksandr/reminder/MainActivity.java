@@ -15,6 +15,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 import reminder.com.aleksandr.reminder.adapter.TabAdapter;
 import reminder.com.aleksandr.reminder.alarm.AlarmHelper;
 import reminder.com.aleksandr.reminder.database.DBHelper;
@@ -47,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements AddingTaskDialogF
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_main);
 
         Ads.showBanner(this);

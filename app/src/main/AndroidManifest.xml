@@ -44,6 +44,9 @@
             <action android:name="android.intent.action.BOOT_COMPLETED"/>
         </receiver>
         
+        <!--<meta-data-->
+            <!--android:name="io.fabric.ApiKey"-->
+            <!--android:value="app/fabric.properties/apiKey" />-->
     </application>
 
 </manifest>
