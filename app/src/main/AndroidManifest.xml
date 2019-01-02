@@ -3,8 +3,8 @@
     package="reminder.com.aleksandr.reminder" >
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-    <user-permission android:name="android.permission.INTERNET"/>
-    <user-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -41,7 +41,9 @@
             android:process=":remote"/>
 
         <receiver android:name=".alarm.AlarmSetter">
-            <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
         </receiver>
         
         <!--<meta-data-->
