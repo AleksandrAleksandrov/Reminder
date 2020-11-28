@@ -33,8 +33,8 @@ public abstract class TaskAdapter extends RecyclerView.Adapter<RecyclerView.View
         items = new ArrayList<>();
     }
 
-    public Item getItem(int postion) {
-        return items.get(postion);
+    public Item getItem(int position) {
+        return items.get(position);
     }
 
     public void addItem(Item item) {
