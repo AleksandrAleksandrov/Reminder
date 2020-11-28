@@ -17,13 +17,13 @@ repositories {
 
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion sdkVersion
     buildToolsVersion '28.0.3'
 
     defaultConfig {
         applicationId "reminder.com.aleksandr.reminder"
         minSdkVersion 14
-        targetSdkVersion 28
+        targetSdkVersion sdkVersion
         versionCode 3
         versionName "3"
 
