@@ -2,16 +2,17 @@ package reminder.com.aleksandr.reminder.dialog;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.os.Bundle;
 import android.widget.DatePicker;
 
 import java.util.Calendar;
 
 /**
- * Created by aleksandr on 9/17/15.
+ * Created by Aleksandr Aleksandrov
+ * Date: 9/17/15
+ * Time: 11:18 AM
  */
-public class DatePickerFragment extends DialogFragment
+public class DatePickerFragment extends BaseDialogFragment
         implements DatePickerDialog.OnDateSetListener {
 
     @Override

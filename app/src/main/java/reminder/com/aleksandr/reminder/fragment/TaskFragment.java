@@ -1,26 +1,28 @@
 package reminder.com.aleksandr.reminder.fragment;
 
 import android.app.AlertDialog;
-import android.app.DialogFragment;
-import android.app.Fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.google.android.material.snackbar.Snackbar;
+
+import androidx.recyclerview.widget.RecyclerView;
 import reminder.com.aleksandr.reminder.MainActivity;
 import reminder.com.aleksandr.reminder.R;
 import reminder.com.aleksandr.reminder.adapter.TaskAdapter;
 import reminder.com.aleksandr.reminder.alarm.AlarmHelper;
+import reminder.com.aleksandr.reminder.dialog.BaseDialogFragment;
 import reminder.com.aleksandr.reminder.dialog.EditTaskDialogFragment;
 import reminder.com.aleksandr.reminder.model.Item;
 import reminder.com.aleksandr.reminder.model.ModelTask;
 
 /**
- * Created by aleksandr on 9/18/15.
+ * Created by Aleksandr Aleksandrov
+ * Date: 9/18/15
+ * Time: 11:18 AM
  */
-public abstract class TaskFragment extends Fragment {
+public abstract class TaskFragment extends BaseFragment {
 
     protected RecyclerView recyclerView;
     protected RecyclerView.LayoutManager layoutManager;
@@ -113,8 +115,8 @@ public abstract class TaskFragment extends Fragment {
     }
 
     public void showTaskEditDialog(ModelTask task) {
-        DialogFragment editingTaskDialog = EditTaskDialogFragment.newInstance(task);
-        editingTaskDialog.show(getActivity().getFragmentManager(), "EditTaskDialogFragment");
+        BaseDialogFragment editingTaskDialog = EditTaskDialogFragment.newInstance(task);
+        editingTaskDialog.show(getActivity().getSupportFragmentManager(), "EditTaskDialogFragment");
     }
 
     public abstract void findTasks(String title);

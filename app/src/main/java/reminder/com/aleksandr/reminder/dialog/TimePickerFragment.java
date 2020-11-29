@@ -1,7 +1,6 @@
 package reminder.com.aleksandr.reminder.dialog;
 
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -12,7 +11,7 @@ import java.util.Calendar;
 /**
  * Created by aleksandr on 9/17/15.
  */
-public class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
+public class TimePickerFragment extends BaseDialogFragment implements TimePickerDialog.OnTimeSetListener {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

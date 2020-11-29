@@ -2,10 +2,7 @@ package reminder.com.aleksandr.reminder.fragment;
 
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import reminder.com.aleksandr.reminder.R;
 import reminder.com.aleksandr.reminder.adapter.CurrentTaskAdapter;
 import reminder.com.aleksandr.reminder.database.DBHelper;
@@ -22,7 +21,9 @@ import reminder.com.aleksandr.reminder.model.ModelTask;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * Created by Aleksandr Aleksandrov
+ * Date: 4/17/15
+ * Time: 11:18 AM
  */
 public class CurrentTaskFragment extends TaskFragment {
 

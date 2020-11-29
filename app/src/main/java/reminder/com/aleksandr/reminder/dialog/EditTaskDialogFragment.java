@@ -2,13 +2,14 @@ package reminder.com.aleksandr.reminder.dialog;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.design.widget.TextInputLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,7 +20,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 
+import com.google.android.material.textfield.TextInputLayout;
+
 import java.util.Calendar;
+import java.util.TimeZone;
 
 import reminder.com.aleksandr.reminder.R;
 import reminder.com.aleksandr.reminder.alarm.AlarmHelper;
@@ -29,7 +33,7 @@ import reminder.com.aleksandr.reminder.model.ModelTask;
 /**
  * Created by aleksandr on 9/22/15.
  */
-public class EditTaskDialogFragment extends DialogFragment {
+public class EditTaskDialogFragment extends BaseDialogFragment {
 
     public static EditTaskDialogFragment newInstance(ModelTask task) {
         EditTaskDialogFragment editTaskDialogFragment = new EditTaskDialogFragment();
@@ -133,7 +137,14 @@ public class EditTaskDialogFragment extends DialogFragment {
                 if (etDate.length() == 0) {
                     etDate.setText(" ");
                 }
-                DialogFragment datePickerFragment = new DatePickerFragment() {
+
+                //TODO put inside class
+                Calendar c = Calendar.getInstance();
+                c.setTimeZone(TimeZone.getTimeZone("UTC"));
+                int year = c.get(Calendar.YEAR);
+                int month = c.get(Calendar.MONTH);
+                int day = c.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog dialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         calendar.set(Calendar.YEAR, year);
@@ -142,12 +153,8 @@ public class EditTaskDialogFragment extends DialogFragment {
                         etDate.setText(Utils.getDate(calendar.getTimeInMillis()));
                     }
 
-                    @Override
-                    public void onCancel(DialogInterface dialog) {
-                        etDate.setText(null);
-                    }
-                };
-                datePickerFragment.show(getFragmentManager(), "DatePickerFragment");
+                }, year, month, day);
+                dialog.show();
             }
         });
 
@@ -156,7 +163,16 @@ public class EditTaskDialogFragment extends DialogFragment {
                 if (etTime.length() == 0) {
                     etTime.setText(" ");
                 }
-                DialogFragment timePickerFragment = new TimePickerFragment() {
+                //TODO put inside class
+                Calendar c = Calendar.getInstance();
+                c.setTimeZone(TimeZone.getTimeZone("UTC"));
+                int year = c.get(Calendar.YEAR);
+                int month = c.get(Calendar.MONTH);
+                int day = c.get(Calendar.DAY_OF_MONTH);
+                int hour = c.get(Calendar.HOUR);
+                int minute = c.get(Calendar.MINUTE);
+                TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
+
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
@@ -164,13 +180,8 @@ public class EditTaskDialogFragment extends DialogFragment {
                         calendar.set(Calendar.SECOND, 0);
                         etTime.setText(Utils.getTime(calendar.getTimeInMillis()));
                     }
-
-                    @Override
-                    public void onCancel(DialogInterface dialog) {
-                        etTime.setText(null);
-                    }
-                };
-                timePickerFragment.show(getFragmentManager(), "TimePickerFragment");
+                }, hour, minute, DateFormat.is24HourFormat(getActivity()));
+                timePickerDialog.show();
             }
         });
 

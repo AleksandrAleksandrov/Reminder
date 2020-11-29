@@ -1,26 +1,25 @@
 package reminder.com.aleksandr.reminder;
 
-import android.app.DialogFragment;
-import android.app.FragmentManager;
 import android.os.Bundle;
 import android.os.PersistableBundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.crashlytics.android.Crashlytics;
-import io.fabric.sdk.android.Fabric;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
 import reminder.com.aleksandr.reminder.adapter.TabAdapter;
 import reminder.com.aleksandr.reminder.alarm.AlarmHelper;
 import reminder.com.aleksandr.reminder.database.DBHelper;
 import reminder.com.aleksandr.reminder.dialog.AddingTaskDialogFragment;
+import reminder.com.aleksandr.reminder.dialog.BaseDialogFragment;
 import reminder.com.aleksandr.reminder.dialog.EditTaskDialogFragment;
 import reminder.com.aleksandr.reminder.fragment.CurrentTaskFragment;
 import reminder.com.aleksandr.reminder.fragment.DoneTaskFragment;
@@ -31,9 +30,10 @@ import reminder.com.aleksandr.reminder.model.ModelTask;
 public class MainActivity extends AppCompatActivity implements AddingTaskDialogFragment.AddingTaskListener,
         CurrentTaskFragment.OnTaskDoneListener,
         DoneTaskFragment.OnTaskRestoreListener,
-        EditTaskDialogFragment.EditingTaskListener{
+        EditTaskDialogFragment.EditingTaskListener {
 
-    FragmentManager fragmentManager;
+    //TODO change this flag in CI script
+    private static final boolean IS_LOCAL_BUILD = true;
 
     PreferenceHelper preferenceHelper;
 
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements AddingTaskDialogF
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Fabric.with(this, new Crashlytics());
+        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(!IS_LOCAL_BUILD);
         setContentView(R.layout.activity_main);
 
         Ads.showBanner(this);
@@ -61,8 +61,6 @@ public class MainActivity extends AppCompatActivity implements AddingTaskDialogF
         AlarmHelper.getInstance().init(getApplicationContext());
 
         dbHelper = new DBHelper(getApplicationContext());
-
-        fragmentManager = getFragmentManager();
 
         runSplash();
 
@@ -106,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements AddingTaskDialogF
         if (!preferenceHelper.getBoolean(PreferenceHelper.SPLASH_IS_INVISIBLE)) {
             SplashFragment splashFragment = new SplashFragment();
 
-            fragmentManager.beginTransaction().replace(R.id.content_frame, splashFragment).addToBackStack(null).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, splashFragment).addToBackStack(null).commit();
         }
     }
 
@@ -122,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements AddingTaskDialogF
         tabLayout.addTab(tabLayout.newTab().setText(R.string.done_task));
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        tabAdapter = new TabAdapter(fragmentManager, 2);
+        tabAdapter = new TabAdapter(getSupportFragmentManager(), 2);
 
         viewPager.setAdapter(tabAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -145,8 +143,8 @@ public class MainActivity extends AppCompatActivity implements AddingTaskDialogF
         });
         FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
         floatingActionButton.setOnClickListener((View view) -> {
-            DialogFragment addingTaskDialogFragment = new AddingTaskDialogFragment();
-            addingTaskDialogFragment.show(fragmentManager, "AddingTaskDialogFragment");
+            BaseDialogFragment addingTaskDialogFragment = new AddingTaskDialogFragment();
+            addingTaskDialogFragment.show(getSupportFragmentManager(), "AddingTaskDialogFragment");
         });
 
         currentTaskFragment = (CurrentTaskFragment) tabAdapter.getItem(TabAdapter.CURRENT_TASK_FRAGMENT_POSITION);

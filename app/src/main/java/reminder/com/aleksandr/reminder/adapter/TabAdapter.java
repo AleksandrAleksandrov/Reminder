@@ -1,9 +1,8 @@
 package reminder.com.aleksandr.reminder.adapter;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.support.v13.app.FragmentStatePagerAdapter;
-
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 import reminder.com.aleksandr.reminder.fragment.CurrentTaskFragment;
 import reminder.com.aleksandr.reminder.fragment.DoneTaskFragment;
 
@@ -21,7 +20,7 @@ public class TabAdapter extends FragmentStatePagerAdapter {
     private DoneTaskFragment doneTaskFragment;
 
     public TabAdapter(FragmentManager fm, int numberOfTabs) {
-        super(fm);
+        super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         this.numberOfTabs = numberOfTabs;
         currentTaskFragment = new CurrentTaskFragment();
         doneTaskFragment = new DoneTaskFragment();

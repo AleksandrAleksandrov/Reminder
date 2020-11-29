@@ -1,12 +1,12 @@
 package reminder.com.aleksandr.reminder.adapter;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.recyclerview.widget.RecyclerView;
 import de.hdodenhof.circleimageview.CircleImageView;
 import reminder.com.aleksandr.reminder.fragment.TaskFragment;
 import reminder.com.aleksandr.reminder.model.Item;

@@ -3,7 +3,6 @@ package reminder.com.aleksandr.reminder.fragment;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +11,12 @@ import java.util.concurrent.TimeUnit;
 
 import reminder.com.aleksandr.reminder.R;
 
-
 /**
- * A simple {@link Fragment} subclass.
+ * Created by Aleksandr Aleksandrov
+ * Date: 5/17/15
+ * Time: 11:18 AM
  */
-public class SplashFragment extends Fragment {
+public class SplashFragment extends BaseFragment {
 
 
     public SplashFragment() {
@@ -42,7 +42,7 @@ public class SplashFragment extends Fragment {
                 e.printStackTrace();
             }
             if (getActivity() != null) {
-                getActivity().getFragmentManager().popBackStack();
+                getActivity().getSupportFragmentManager().popBackStack();
             }
             return null;
         }
