@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements AddingTaskDialogF
 
         setUI();
         //remove commits
+        //commit 1 dev
     }
 
     @Override
